@@ -88,7 +88,7 @@ export function ResultDisplay({ result, onReset, onShare }: ResultDisplayProps) 
 
         <div className="text-center">
           <p className="text-white/50 text-xs tracking-widest">
-            REFLEX BLUE — COFFEE ENERGY MATRIX
+            CUPOTI CAFE — COFFEE ENERGY MATRIX
           </p>
         </div>
       </div>
