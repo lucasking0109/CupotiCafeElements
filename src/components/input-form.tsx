@@ -36,7 +36,7 @@ export function InputForm({ onSubmit }: InputFormProps) {
         onSubmit={handleSubmit}
         className="w-full max-w-md space-y-10 backdrop-blur-2xl bg-white/5 p-12 rounded-2xl shadow-2xl border border-white/10"
       >
-        <div className="text-center space-y-3">
+        <div className="text-center space-y-6">
           <Image
             src="/cupoti-logo.png"
             alt="Cupoti Cafe & Cocktail"
