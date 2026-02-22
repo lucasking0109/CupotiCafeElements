@@ -21,10 +21,9 @@ export function InputForm({ onSubmit }: InputFormProps) {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (birthday.length === 10 && selectedMood) {
-      const [month, day, year] = birthday.split("/");
+    if (birthday && selectedMood) {
       onSubmit({
-        birthday: new Date(Number(year), Number(month) - 1, Number(day)),
+        birthday: new Date(birthday),
         mood: selectedMood,
       });
     }
@@ -54,23 +53,25 @@ export function InputForm({ onSubmit }: InputFormProps) {
               <Calendar size={16} className="text-[#001489]" />
               生日
             </label>
-            <input
-              type="text"
-              inputMode="numeric"
-              value={birthday}
-              placeholder="MM/DD/YYYY"
-              onChange={(e) => {
-                const raw = e.target.value.replace(/\D/g, "");
-                let formatted = raw;
-                if (raw.length > 2) formatted = `${raw.slice(0, 2)}/${raw.slice(2)}`;
-                if (raw.length > 4) formatted = `${raw.slice(0, 2)}/${raw.slice(2, 4)}/${raw.slice(4, 8)}`;
-                setBirthday(formatted);
-              }}
-              maxLength={10}
-              required
-              aria-label="選擇生日日期"
-              className="w-full px-4 py-3 rounded-lg bg-white/5 border border-white/20 text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-[#001489]/50 backdrop-blur-sm transition-all"
-            />
+            <div className="relative">
+              <input
+                type="date"
+                value={birthday}
+                onChange={(e) => setBirthday(e.target.value)}
+                required
+                aria-label="選擇生日日期"
+                className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
+              />
+              <div className="w-full px-4 py-3 rounded-lg bg-white/5 border border-white/20 backdrop-blur-sm transition-all pointer-events-none">
+                {birthday ? (
+                  <span className="text-white">
+                    {`${birthday.slice(5, 7)}/${birthday.slice(8, 10)}/${birthday.slice(0, 4)}`}
+                  </span>
+                ) : (
+                  <span className="text-white/40">MM/DD/YYYY</span>
+                )}
+              </div>
+            </div>
           </div>
 
           <div className="space-y-4">
@@ -104,7 +105,7 @@ export function InputForm({ onSubmit }: InputFormProps) {
 
         <button
           type="submit"
-          disabled={birthday.length !== 10 || !selectedMood}
+          disabled={!birthday || !selectedMood}
           className="w-full py-4 rounded-lg bg-[#001489] hover:bg-[#001489]/90 disabled:bg-white/5 disabled:cursor-not-allowed text-white font-light tracking-wider transition-all"
         >
           探索能量飲品
