@@ -58,9 +58,8 @@ export function InputForm({ onSubmit }: InputFormProps) {
               value={birthday}
               onChange={(e) => setBirthday(e.target.value)}
               required
-              placeholder="MM/DD/YYYY"
               aria-label="選擇生日日期"
-              className="w-full px-4 py-3 rounded-lg bg-white/5 border border-white/20 text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-[#001489]/50 backdrop-blur-sm transition-all [&:not(:valid)]:text-white/40"
+              className="w-full px-4 py-3 rounded-lg bg-white/5 border border-white/20 text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-[#001489]/50 backdrop-blur-sm transition-all"
             />
           </div>
 

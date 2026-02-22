@@ -15,14 +15,3 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   filter: invert(0.8);
   cursor: pointer;
 }
-
-input[type="date"]:invalid::-webkit-datetime-edit {
-  color: transparent;
-}
-
-input[type="date"]:invalid::before {
-  content: attr(placeholder);
-  color: rgba(255, 255, 255, 0.4);
-  position: absolute;
-  pointer-events: none;
-}
