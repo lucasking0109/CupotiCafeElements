@@ -5,15 +5,10 @@
   --font-mono: var(--font-geist-mono);
 }
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-body {
-  font-family: -apple-system, "system-ui", "Segoe UI", sans-serif;
-  min-height: 100vh;
+@layer base {
+  body {
+    min-height: 100vh;
+  }
 }
 
 input[type="date"]::-webkit-calendar-picker-indicator {
