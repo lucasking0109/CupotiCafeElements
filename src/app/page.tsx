@@ -25,31 +25,6 @@ export default function Home() {
     setColors(DEFAULT_COLORS);
   };
 
-  const handleShare = async () => {
-    if (!result || !userInput) return;
-
-    const shareText = `Cupoti Cafe Energy Matrix\n\n${result.data.name} Element · ${result.data.roast}\n${result.selectedCoffee.name}\n\n${result.data.mantra}\n\nDiscover your coffee energy #CupotiCafe #CoffeeEnergy #FiveElements`;
-
-    const shareData = {
-      title: "Cupoti Cafe - Coffee Energy Matrix",
-      text: shareText,
-      url: window.location.href,
-    };
-
-    try {
-      if (navigator.share && navigator.canShare(shareData)) {
-        await navigator.share(shareData);
-      } else {
-        await navigator.clipboard.writeText(
-          `${shareText}\n\n${window.location.href}`,
-        );
-        alert("已複製到剪貼簿！");
-      }
-    } catch {
-      // share cancelled by user
-    }
-  };
-
   return (
     <>
       <ColorFlow colors={colors} intensity={result ? 0.7 : 1} />
@@ -59,7 +34,6 @@ export default function Home() {
         <ResultDisplay
           result={result}
           onReset={handleReset}
-          onShare={handleShare}
         />
       )}
     </>

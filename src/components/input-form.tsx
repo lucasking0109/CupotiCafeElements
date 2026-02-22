@@ -106,7 +106,7 @@ export function InputForm({ onSubmit }: InputFormProps) {
         <button
           type="submit"
           disabled={!birthday || !selectedMood}
-          className="w-full py-4 rounded-lg bg-[#001489] hover:bg-[#001489]/90 disabled:bg-white/5 disabled:cursor-not-allowed text-white font-light tracking-wider transition-all"
+          className="w-full py-4 rounded-lg bg-[#001489] hover:bg-[#001489]/90 disabled:bg-white/5 disabled:cursor-not-allowed text-white font-light tracking-wider transition-all border border-white/20"
         >
           探索能量飲品
         </button>

@@ -1,21 +1,64 @@
 "use client";
 
-import { Share2, RotateCcw } from "lucide-react";
+import { useRef, useState } from "react";
+import { Download, RotateCcw } from "lucide-react";
+import html2canvas from "html2canvas";
 import type { Result } from "@/lib/types";
 
 interface ResultDisplayProps {
   result: Result;
   onReset: () => void;
-  onShare: () => void;
 }
 
-export function ResultDisplay({ result, onReset, onShare }: ResultDisplayProps) {
+export function ResultDisplay({ result, onReset }: ResultDisplayProps) {
   const { data, selectedCoffee, luckyColor } = result;
+  const captureRef = useRef<HTMLDivElement>(null);
+  const [isCapturing, setIsCapturing] = useState(false);
+
+  const handleSaveAndShare = async () => {
+    if (!captureRef.current || isCapturing) return;
+
+    setIsCapturing(true);
+    try {
+      const canvas = await html2canvas(captureRef.current, {
+        backgroundColor: null,
+        scale: 2,
+        useCORS: true,
+      });
+
+      const blob = await new Promise<Blob>((resolve) => {
+        canvas.toBlob((b) => resolve(b!), "image/png");
+      });
+
+      const file = new File([blob], "cupoti-cafe-result.png", { type: "image/png" });
+
+      if (navigator.share && navigator.canShare({ files: [file] })) {
+        await navigator.share({
+          files: [file],
+          title: "Cupoti Cafe - Coffee Energy Matrix",
+          text: `${data.name} Element · ${selectedCoffee.name}`,
+        });
+      } else {
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement("a");
+        link.href = url;
+        link.download = "cupoti-cafe-result.png";
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        URL.revokeObjectURL(url);
+      }
+    } catch {
+      // share cancelled or failed
+    } finally {
+      setIsCapturing(false);
+    }
+  };
 
   return (
     <div className="min-h-screen flex items-center justify-center p-6">
       <div className="w-full max-w-2xl space-y-8">
-        <div className="backdrop-blur-2xl bg-white/5 p-12 rounded-2xl shadow-2xl border border-white/10 space-y-10">
+        <div ref={captureRef} className="backdrop-blur-2xl bg-white/5 p-12 rounded-2xl shadow-2xl border border-white/10 space-y-10">
           <div className="text-center space-y-8">
             <div
               className="w-40 h-40 mx-auto rounded-2xl shadow-2xl flex items-center justify-center text-7xl"
@@ -69,11 +112,18 @@ export function ResultDisplay({ result, onReset, onShare }: ResultDisplayProps) 
 
           <div className="pt-6 space-y-3">
             <button
-              onClick={onShare}
-              className="w-full py-4 rounded-lg bg-[#001489] hover:bg-[#001489]/90 text-white font-light tracking-wider transition-all flex items-center justify-center gap-2 border border-[#001489]"
+              onClick={handleSaveAndShare}
+              disabled={isCapturing}
+              className="w-full py-4 rounded-lg bg-[#001489] hover:bg-[#001489]/90 disabled:bg-[#001489]/50 text-white font-light tracking-wider transition-all flex items-center justify-center gap-2 border border-white/20"
             >
-              <Share2 size={20} />
-              分享至 Instagram
+              {isCapturing ? (
+                <>處理中...</>
+              ) : (
+                <>
+                  <Download size={20} />
+                  儲存並分享圖片
+                </>
+              )}
             </button>
 
             <button
