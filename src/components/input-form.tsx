@@ -54,8 +54,11 @@ export function InputForm({ onSubmit }: InputFormProps) {
               生日
             </label>
             <input
-              type="date"
+              type={birthday ? "date" : "text"}
               value={birthday}
+              placeholder="MM/DD/YYYY"
+              onFocus={(e) => { e.target.type = "date"; }}
+              onBlur={(e) => { if (!e.target.value) e.target.type = "text"; }}
               onChange={(e) => setBirthday(e.target.value)}
               required
               aria-label="選擇生日日期"
