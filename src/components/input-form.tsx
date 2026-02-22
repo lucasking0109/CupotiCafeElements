@@ -38,7 +38,7 @@ export function InputForm({ onSubmit }: InputFormProps) {
       >
         <div className="text-center space-y-3">
           <Image
-            src="/cupoti-logo.jpg"
+            src="/cupoti-logo.png"
             alt="Cupoti Cafe & Cocktail"
             width={380}
             height={134}
