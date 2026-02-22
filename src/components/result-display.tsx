@@ -18,16 +18,18 @@ export function ResultDisplay({ result, onReset, onShare }: ResultDisplayProps) 
         <div className="backdrop-blur-2xl bg-white/5 p-12 rounded-2xl shadow-2xl border border-white/10 space-y-10">
           <div className="text-center space-y-8">
             <div
-              className="w-40 h-40 mx-auto rounded-2xl shadow-2xl"
+              className="w-40 h-40 mx-auto rounded-2xl shadow-2xl flex items-center justify-center text-7xl"
               style={{
                 background: `linear-gradient(135deg, ${luckyColor}, ${data.colors[data.colors.length - 1]})`,
               }}
-            />
+            >
+              {data.emoji}
+            </div>
 
             <div className="space-y-4">
               <h2
                 className="text-6xl font-light text-white tracking-wider"
-                style={{ fontFamily: "var(--font-playfair), Playfair Display, serif" }}
+                style={{ fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif" }}
               >
                 {data.name} Element
               </h2>
@@ -44,7 +46,7 @@ export function ResultDisplay({ result, onReset, onShare }: ResultDisplayProps) 
             <div className="text-center space-y-4">
               <h3
                 className="text-4xl font-light text-white"
-                style={{ fontFamily: "var(--font-playfair), Playfair Display, serif" }}
+                style={{ fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif" }}
               >
                 {selectedCoffee.name}
               </h3>

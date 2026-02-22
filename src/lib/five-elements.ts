@@ -4,6 +4,7 @@ const ELEMENT_DATA: Record<Element, ElementData> = {
   wood: {
     name: "木",
     chineseName: "Wood",
+    emoji: "🪵",
     colors: ["#2D5016", "#4A7C3C", "#6B9654", "#8FB574"],
     primaryColor: "#2D5016",
     roast: "Light Roast",
@@ -17,6 +18,7 @@ const ELEMENT_DATA: Record<Element, ElementData> = {
   fire: {
     name: "火",
     chineseName: "Fire",
+    emoji: "☄️",
     colors: ["#8B2500", "#C73E1D", "#E67E50", "#F4A460"],
     primaryColor: "#8B2500",
     roast: "Medium Roast",
@@ -30,6 +32,7 @@ const ELEMENT_DATA: Record<Element, ElementData> = {
   earth: {
     name: "土",
     chineseName: "Earth",
+    emoji: "🪐",
     colors: ["#6B4423", "#8B6635", "#A68A5C", "#C4A973"],
     primaryColor: "#6B4423",
     roast: "Medium Roast",
@@ -43,6 +46,7 @@ const ELEMENT_DATA: Record<Element, ElementData> = {
   metal: {
     name: "金",
     chineseName: "Metal",
+    emoji: "✨",
     colors: ["#E8E8E8", "#C0C0C0", "#F5F5F5", "#D4D4D4"],
     primaryColor: "#C0C0C0",
     roast: "Medium+ Roast",
@@ -56,6 +60,7 @@ const ELEMENT_DATA: Record<Element, ElementData> = {
   water: {
     name: "水",
     chineseName: "Water",
+    emoji: "💧",
     colors: ["#1A3A52", "#2C5F7F", "#4A8AAE", "#6DB3D8"],
     primaryColor: "#001489",
     roast: "Dark Roast",

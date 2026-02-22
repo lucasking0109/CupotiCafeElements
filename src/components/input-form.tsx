@@ -38,7 +38,7 @@ export function InputForm({ onSubmit }: InputFormProps) {
         <div className="text-center space-y-3">
           <h1
             className="text-5xl font-light text-white"
-            style={{ fontFamily: "var(--font-playfair), Playfair Display, serif" }}
+            style={{ fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif" }}
           >
             Cupoti Cafe
           </h1>

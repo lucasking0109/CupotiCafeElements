@@ -11,6 +11,7 @@ export interface CoffeeOption {
 export interface ElementData {
   name: string;
   chineseName: string;
+  emoji: string;
   colors: string[];
   primaryColor: string;
   roast: string;
