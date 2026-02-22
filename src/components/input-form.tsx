@@ -5,10 +5,10 @@ import { Calendar, Heart } from "lucide-react";
 import type { Mood, UserInput } from "@/lib/types";
 
 const MOODS: { value: Mood; label: string; icon: string }[] = [
-  { value: "anxious", label: "焦慮", icon: "⚡" },
-  { value: "tired", label: "疲憊", icon: "🌙" },
-  { value: "calm", label: "平靜", icon: "🌊" },
   { value: "joyful", label: "喜悅", icon: "✨" },
+  { value: "calm", label: "平靜", icon: "🌊" },
+  { value: "tired", label: "疲憊", icon: "🌙" },
+  { value: "anxious", label: "焦慮", icon: "⚡" },
 ];
 
 interface InputFormProps {
@@ -40,10 +40,10 @@ export function InputForm({ onSubmit }: InputFormProps) {
             className="text-5xl font-light text-white"
             style={{ fontFamily: "var(--font-playfair), Playfair Display, serif" }}
           >
-            Reflex Blue
+            Cupoti Cafe
           </h1>
           <p className="text-white/60 text-sm tracking-widest">
-            COFFEE ENERGY MATRIX
+            五行能量飲品指南 | Coffee Energy Matrix
           </p>
         </div>
 
@@ -58,8 +58,9 @@ export function InputForm({ onSubmit }: InputFormProps) {
               value={birthday}
               onChange={(e) => setBirthday(e.target.value)}
               required
+              placeholder="MM/DD/YYYY"
               aria-label="選擇生日日期"
-              className="w-full px-4 py-3 rounded-lg bg-white/5 border border-white/20 text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-[#001489]/50 backdrop-blur-sm transition-all"
+              className="w-full px-4 py-3 rounded-lg bg-white/5 border border-white/20 text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-[#001489]/50 backdrop-blur-sm transition-all [&:not(:valid)]:text-white/40"
             />
           </div>
 
@@ -95,7 +96,7 @@ export function InputForm({ onSubmit }: InputFormProps) {
         <button
           type="submit"
           disabled={!birthday || !selectedMood}
-          className="w-full py-4 rounded-lg bg-[#001489] hover:bg-[#001489]/90 disabled:bg-white/5 disabled:cursor-not-allowed text-white font-light tracking-wider transition-all border border-[#001489]"
+          className="w-full py-4 rounded-lg bg-[#001489] hover:bg-[#001489]/90 disabled:bg-white/5 disabled:cursor-not-allowed text-white font-light tracking-wider transition-all"
         >
           探索能量飲品
         </button>
