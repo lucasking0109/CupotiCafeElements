@@ -88,7 +88,7 @@ export function ResultDisplay({ result, onReset, onShare }: ResultDisplayProps) 
 
         <div className="text-center">
           <p className="text-white/50 text-xs tracking-widest">
-            CUPOTI CAFE — COFFEE ENERGY MATRIX
+            Cupoti Cafe — Coffee Energy Matrix
           </p>
         </div>
       </div>
