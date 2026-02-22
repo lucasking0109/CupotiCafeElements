@@ -40,8 +40,8 @@ export function InputForm({ onSubmit }: InputFormProps) {
           <Image
             src="/cupoti-logo.png"
             alt="Cupoti Cafe & Cocktail"
-            width={380}
-            height={134}
+            width={280}
+            height={99}
             className="mx-auto"
             priority
           />
