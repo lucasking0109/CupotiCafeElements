@@ -28,10 +28,10 @@ export default function Home() {
   const handleShare = async () => {
     if (!result || !userInput) return;
 
-    const shareText = `Reflex Blue Energy Matrix\n\n${result.data.name} Element · ${result.data.roast}\n${result.selectedCoffee.name}\n\n${result.data.mantra}\n\nDiscover your coffee energy #ReflexBlue #CoffeeEnergy #FiveElements`;
+    const shareText = `Cupoti Cafe Energy Matrix\n\n${result.data.name} Element · ${result.data.roast}\n${result.selectedCoffee.name}\n\n${result.data.mantra}\n\nDiscover your coffee energy #CupotiCafe #CoffeeEnergy #FiveElements`;
 
     const shareData = {
-      title: "Reflex Blue - Coffee Energy Matrix",
+      title: "Cupoti Cafe - Coffee Energy Matrix",
       text: shareText,
       url: window.location.href,
     };
