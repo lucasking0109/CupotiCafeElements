@@ -1,120 +1,111 @@
-export type Element = "金" | "木" | "水" | "火" | "土";
-export type Mood = "焦慮" | "疲憊" | "平靜" | "喜悅";
-
-interface ElementData {
-  element: Element;
-  symbol: string;
-  roast: string;
-  quote: string;
-  drinkName: string;
-  drinkNameEn: string;
-  drinkDescription: string;
-  tags: string[];
-  gradient: string;
-  cardBg: string;
-  accentColor: string;
-}
+import type { Element, ElementData, Mood, UserInput, Result } from "./types";
 
 const ELEMENT_DATA: Record<Element, ElementData> = {
-  金: {
-    element: "金",
-    symbol: "金",
-    roast: "MEDIUM+ ROAST",
-    quote: "白金之鋒，掌握當下的決斷力",
-    drinkName: "香橙冰美式",
-    drinkNameEn: "",
-    drinkDescription: "醒神型單品",
-    tags: ["柑橘爽感", "清晰線條", "果香層次"],
-    gradient: "from-gray-300 via-gray-400 to-gray-500",
-    cardBg: "rgba(200, 200, 210, 0.25)",
-    accentColor: "#9CA3AF",
+  wood: {
+    name: "木",
+    chineseName: "Wood",
+    colors: ["#2D5016", "#4A7C3C", "#6B9654", "#8FB574"],
+    primaryColor: "#2D5016",
+    roast: "Light Roast",
+    coffeeOptions: [
+      { name: "抹茶拿鐵", description: "淺焙手沖單品", notes: ["新鮮草本", "青檸", "微苦回甘"] },
+      { name: "蘋果冰美式", description: "淺焙手沖", notes: ["清新果香", "酸甜平衡", "生機感"] },
+    ],
+    mantra: "生發之力，自內而外的創造能量",
+    energy: "生長・創造・舒展",
   },
-  木: {
-    element: "木",
-    symbol: "木",
-    roast: "LIGHT ROAST",
-    quote: "生發之力，自內而外的創造能量",
-    drinkName: "抹茶拿鐵",
-    drinkNameEn: "",
-    drinkDescription: "淺焙手沖單品",
-    tags: ["新鮮草本", "青檸", "微苦回甘"],
-    gradient: "from-green-700 via-green-600 to-green-500",
-    cardBg: "rgba(34, 120, 60, 0.25)",
-    accentColor: "#4ADE80",
+  fire: {
+    name: "火",
+    chineseName: "Fire",
+    colors: ["#8B2500", "#C73E1D", "#E67E50", "#F4A460"],
+    primaryColor: "#8B2500",
+    roast: "Medium Roast",
+    coffeeOptions: [
+      { name: "紅心芭樂冰美式", description: "中焙手沖單品", notes: ["果香奔放", "甜感層次", "活躍口感"] },
+      { name: "摩卡咖啡", description: "中焙混調", notes: ["巧克力", "焦糖", "溫暖質感"] },
+    ],
+    mantra: "赤焰之心，擁抱變化的勇氣",
+    energy: "熱烈・激情・轉化",
   },
-  水: {
-    element: "水",
-    symbol: "水",
-    roast: "DARK ROAST",
-    quote: "深海之智，流動包容的內在力量",
-    drinkName: "康寶藍 Con Panna",
-    drinkNameEn: "",
-    drinkDescription: "濃縮加冰淇淋",
-    tags: ["濃郁厚實", "冷熱對比", "優雅享受"],
-    gradient: "from-blue-900 via-blue-700 to-blue-500",
-    cardBg: "rgba(30, 64, 175, 0.25)",
-    accentColor: "#60A5FA",
+  earth: {
+    name: "土",
+    chineseName: "Earth",
+    colors: ["#6B4423", "#8B6635", "#A68A5C", "#C4A973"],
+    primaryColor: "#6B4423",
+    roast: "Medium Roast",
+    coffeeOptions: [
+      { name: "焙茶拿鐵", description: "烘焙茶咖啡混調", notes: ["溫暖焙感", "堅果香氣", "厚實口感"] },
+      { name: "焦糖蘋果拿鐵", description: "溫和親切", notes: ["焦糖甜感", "蘋果溫度", "滑順質地"] },
+    ],
+    mantra: "大地之心，靜觀萬物的穩定力量",
+    energy: "穩定・滋養・承載",
   },
-  火: {
-    element: "火",
-    symbol: "火",
-    roast: "MEDIUM ROAST",
-    quote: "赤焰之心，擁抱變化的勇氣",
-    drinkName: "摩卡咖啡",
-    drinkNameEn: "",
-    drinkDescription: "中焙混調",
-    tags: ["巧克力", "焦糖", "溫暖質感"],
-    gradient: "from-orange-700 via-red-500 to-orange-400",
-    cardBg: "rgba(220, 100, 30, 0.25)",
-    accentColor: "#FB923C",
+  metal: {
+    name: "金",
+    chineseName: "Metal",
+    colors: ["#E8E8E8", "#C0C0C0", "#F5F5F5", "#D4D4D4"],
+    primaryColor: "#C0C0C0",
+    roast: "Medium+ Roast",
+    coffeeOptions: [
+      { name: "香橙冰美式", description: "醒神型單品", notes: ["柑橘爽感", "清晰線條", "果香層次"] },
+      { name: "濃縮通寧", description: "義式經典", notes: ["檸檬草", "苦感明朗", "礦物感"] },
+    ],
+    mantra: "白金之鋒，掌握當下的決斷力",
+    energy: "凝聚・精準・純粹",
   },
-  土: {
-    element: "土",
-    symbol: "土",
-    roast: "MEDIUM ROAST",
-    quote: "大地之心，靜觀萬物的穩定力量",
-    drinkName: "焙茶拿鐵",
-    drinkNameEn: "",
-    drinkDescription: "烘焙茶咖啡混調",
-    tags: ["溫暖焙感", "堅果香氣", "厚實口感"],
-    gradient: "from-amber-800 via-yellow-700 to-amber-500",
-    cardBg: "rgba(180, 130, 50, 0.25)",
-    accentColor: "#D4A056",
+  water: {
+    name: "水",
+    chineseName: "Water",
+    colors: ["#1A3A52", "#2C5F7F", "#4A8AAE", "#6DB3D8"],
+    primaryColor: "#001489",
+    roast: "Dark Roast",
+    coffeeOptions: [
+      { name: "深焙手沖單品", description: "經典美式", notes: ["深邃層次", "黑巧克力", "持久回甘"] },
+      { name: "康寶藍 Con Panna", description: "濃縮加冰淇淋", notes: ["濃郁厚實", "冷熱對比", "優雅享受"] },
+    ],
+    mantra: "深海之智，流動包容的內在力量",
+    energy: "流動・智慧・包容",
   },
 };
 
-// Heavenly Stems (天干) cycle: 甲乙丙丁戊己庚辛壬癸
-// 甲乙=木, 丙丁=火, 戊己=土, 庚辛=金, 壬癸=水
-const STEM_ELEMENTS: Element[] = ["木", "木", "火", "火", "土", "土", "金", "金", "水", "水"];
-
-// Mood modifiers can shift the element
-const MOOD_SHIFT: Record<Mood, Record<Element, Element>> = {
-  焦慮: { 金: "金", 木: "木", 水: "水", 火: "土", 土: "土" },
-  疲憊: { 金: "木", 木: "木", 水: "水", 火: "火", 土: "土" },
-  平靜: { 金: "金", 木: "木", 水: "水", 火: "火", 土: "土" },
-  喜悅: { 金: "金", 木: "火", 水: "水", 火: "火", 土: "土" },
+const MOOD_MODIFIERS: Record<Mood, number> = {
+  anxious: 0,
+  tired: 1,
+  calm: 2,
+  joyful: 3,
 };
 
-export function calculateElement(birthday: string, mood: Mood): Element {
-  const date = new Date(birthday);
-  const year = date.getFullYear();
+function calculateElement(birthday: Date, mood: Mood): Element {
+  const month = birthday.getMonth() + 1;
+  const day = birthday.getDate();
 
-  // Calculate Heavenly Stem based on year
-  // The stem index is determined by (year - 4) % 10
-  const stemIndex = ((year - 4) % 10 + 10) % 10;
-  const baseElement = STEM_ELEMENTS[stemIndex];
+  const baseValue = (month * day) % 5;
+  const moodValue = MOOD_MODIFIERS[mood];
+  const finalValue = (baseValue + moodValue) % 5;
 
-  // Apply mood modifier
-  return MOOD_SHIFT[mood][baseElement];
+  const elements: Element[] = ["wood", "fire", "earth", "metal", "water"];
+  return elements[finalValue];
 }
 
-export function getElementData(element: Element): ElementData {
-  return ELEMENT_DATA[element];
+function selectCoffeeOption(
+  options: ElementData["coffeeOptions"],
+  birthday: Date,
+) {
+  const seed = birthday.getDate() + birthday.getMonth();
+  return options[seed % options.length];
 }
 
-export const MOODS: { emoji: string; label: Mood }[] = [
-  { emoji: "⚡", label: "焦慮" },
-  { emoji: "🌙", label: "疲憊" },
-  { emoji: "🌊", label: "平靜" },
-  { emoji: "✨", label: "喜悅" },
-];
+export function calculateFortune(input: UserInput): Result {
+  const element = calculateElement(input.birthday, input.mood);
+  const data = ELEMENT_DATA[element];
+  const selectedCoffee = selectCoffeeOption(data.coffeeOptions, input.birthday);
+
+  return {
+    element,
+    data,
+    selectedCoffee,
+    luckyColor: data.primaryColor,
+  };
+}
+
+export const DEFAULT_COLORS = ["#001489", "#0D3B66", "#1A5490", "#2E7FB8"];
