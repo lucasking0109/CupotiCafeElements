@@ -1,6 +1,8 @@
 "use client";
 
-import { Share2, RotateCcw } from "lucide-react";
+import { useRef, useState } from "react";
+import { Download, Share2, RotateCcw } from "lucide-react";
+import html2canvas from "html2canvas";
 import type { Result } from "@/lib/types";
 
 interface ResultDisplayProps {
@@ -11,11 +13,39 @@ interface ResultDisplayProps {
 
 export function ResultDisplay({ result, onReset, onShare }: ResultDisplayProps) {
   const { data, selectedCoffee, luckyColor } = result;
+  const cardRef = useRef<HTMLDivElement>(null);
+  const [saving, setSaving] = useState(false);
+
+  const handleSaveCard = async () => {
+    if (!cardRef.current) return;
+    setSaving(true);
+    try {
+      const canvas = await html2canvas(cardRef.current, {
+        backgroundColor: null,
+        scale: 2,
+        useCORS: true,
+      });
+      const link = document.createElement("a");
+      link.download = `cupoti-cafe-${data.name}-energy-card.png`;
+      link.href = canvas.toDataURL("image/png");
+      link.click();
+    } catch {
+      alert("儲存失敗，請稍後再試");
+    } finally {
+      setSaving(false);
+    }
+  };
 
   return (
     <div className="min-h-screen flex items-center justify-center p-6">
       <div className="w-full max-w-2xl space-y-8">
-        <div className="backdrop-blur-2xl bg-white/5 p-12 rounded-2xl shadow-2xl border border-white/10 space-y-10">
+        <div
+          ref={cardRef}
+          className="backdrop-blur-2xl bg-white/5 p-12 rounded-2xl shadow-2xl border border-white/10 space-y-10"
+          style={{
+            background: `linear-gradient(135deg, ${data.colors[0]}dd, ${data.colors[1]}bb, ${data.colors[2]}99)`,
+          }}
+        >
           <div className="text-center space-y-8">
             <div
               className="w-40 h-40 mx-auto rounded-2xl shadow-2xl flex items-center justify-center text-7xl"
@@ -36,13 +66,13 @@ export function ResultDisplay({ result, onReset, onShare }: ResultDisplayProps) 
               <p className="text-white/70 text-lg tracking-widest uppercase">
                 {data.roast}
               </p>
-              <p className="text-[#001489] text-sm tracking-widest">
+              <p className="text-white/80 text-sm tracking-widest">
                 【 {data.mantra} 】
               </p>
             </div>
           </div>
 
-          <div className="border-t border-white/10 pt-10 space-y-8">
+          <div className="border-t border-white/20 pt-10 space-y-8">
             <div className="text-center space-y-4">
               <h3
                 className="text-4xl font-light text-white"
@@ -59,7 +89,7 @@ export function ResultDisplay({ result, onReset, onShare }: ResultDisplayProps) 
               {selectedCoffee.notes.map((note, index) => (
                 <span
                   key={index}
-                  className="px-4 py-2 rounded-lg bg-white/5 text-white/90 text-sm backdrop-blur-sm border border-white/20"
+                  className="px-4 py-2 rounded-lg bg-white/10 text-white/90 text-sm backdrop-blur-sm border border-white/20"
                 >
                   {note}
                 </span>
@@ -67,29 +97,38 @@ export function ResultDisplay({ result, onReset, onShare }: ResultDisplayProps) 
             </div>
           </div>
 
-          <div className="pt-6 space-y-3">
-            <button
-              onClick={onShare}
-              className="w-full py-4 rounded-lg bg-[#001489] hover:bg-[#001489]/90 text-white font-light tracking-wider transition-all flex items-center justify-center gap-2 border border-[#001489]"
-            >
-              <Share2 size={20} />
-              分享至 Instagram
-            </button>
-
-            <button
-              onClick={onReset}
-              className="w-full py-3 rounded-lg bg-white/5 hover:bg-white/10 text-white/70 font-light tracking-wide transition-all border border-white/20 flex items-center justify-center gap-2"
-            >
-              <RotateCcw size={18} />
-              重新探索
-            </button>
+          <div className="text-center pt-4">
+            <p className="text-white/40 text-xs tracking-widest">
+              Cupoti Cafe — Coffee Energy Matrix
+            </p>
           </div>
         </div>
 
-        <div className="text-center">
-          <p className="text-white/50 text-xs tracking-widest">
-            Cupoti Cafe — Coffee Energy Matrix
-          </p>
+        <div className="space-y-3">
+          <button
+            onClick={handleSaveCard}
+            disabled={saving}
+            className="w-full py-4 rounded-lg bg-[#001489] hover:bg-[#001489]/90 text-white font-light tracking-wider transition-all flex items-center justify-center gap-2 border border-white/20"
+          >
+            <Download size={20} />
+            {saving ? "儲存中..." : "儲存能量色卡"}
+          </button>
+
+          <button
+            onClick={onShare}
+            className="w-full py-3 rounded-lg bg-white/5 hover:bg-white/10 text-white/70 font-light tracking-wide transition-all border border-white/20 flex items-center justify-center gap-2"
+          >
+            <Share2 size={18} />
+            分享連結給好友
+          </button>
+
+          <button
+            onClick={onReset}
+            className="w-full py-3 rounded-lg bg-white/5 hover:bg-white/10 text-white/70 font-light tracking-wide transition-all border border-white/20 flex items-center justify-center gap-2"
+          >
+            <RotateCcw size={18} />
+            重新探索
+          </button>
         </div>
       </div>
     </div>

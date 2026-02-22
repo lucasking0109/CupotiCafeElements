@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import { Calendar, Heart } from "lucide-react";
 import type { Mood, UserInput } from "@/lib/types";
 
@@ -36,12 +37,14 @@ export function InputForm({ onSubmit }: InputFormProps) {
         className="w-full max-w-md space-y-10 backdrop-blur-2xl bg-white/5 p-12 rounded-2xl shadow-2xl border border-white/10"
       >
         <div className="text-center space-y-3">
-          <h1
-            className="text-5xl font-light text-white"
-            style={{ fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif" }}
-          >
-            Cupoti Cafe
-          </h1>
+          <Image
+            src="/cupoti-logo.jpg"
+            alt="Cupoti Cafe & Cocktail"
+            width={280}
+            height={140}
+            className="mx-auto"
+            priority
+          />
           <p className="text-white/60 text-sm tracking-widest">
             五行能量飲品指南 | Coffee Energy Matrix
           </p>
@@ -106,7 +109,7 @@ export function InputForm({ onSubmit }: InputFormProps) {
         <button
           type="submit"
           disabled={!birthday || !selectedMood}
-          className="w-full py-4 rounded-lg bg-[#001489] hover:bg-[#001489]/90 disabled:bg-white/5 disabled:cursor-not-allowed text-white font-light tracking-wider transition-all"
+          className="w-full py-4 rounded-lg bg-[#001489] hover:bg-[#001489]/90 disabled:bg-white/5 disabled:cursor-not-allowed text-white font-light tracking-wider transition-all border border-white/20"
         >
           探索能量飲品
         </button>
