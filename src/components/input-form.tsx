@@ -21,9 +21,10 @@ export function InputForm({ onSubmit }: InputFormProps) {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (birthday && selectedMood) {
+    if (birthday.length === 10 && selectedMood) {
+      const [month, day, year] = birthday.split("/");
       onSubmit({
-        birthday: new Date(birthday),
+        birthday: new Date(Number(year), Number(month) - 1, Number(day)),
         mood: selectedMood,
       });
     }
@@ -54,12 +55,18 @@ export function InputForm({ onSubmit }: InputFormProps) {
               生日
             </label>
             <input
-              type={birthday ? "date" : "text"}
+              type="text"
+              inputMode="numeric"
               value={birthday}
               placeholder="MM/DD/YYYY"
-              onFocus={(e) => { e.target.type = "date"; }}
-              onBlur={(e) => { if (!e.target.value) e.target.type = "text"; }}
-              onChange={(e) => setBirthday(e.target.value)}
+              onChange={(e) => {
+                const raw = e.target.value.replace(/\D/g, "");
+                let formatted = raw;
+                if (raw.length > 2) formatted = `${raw.slice(0, 2)}/${raw.slice(2)}`;
+                if (raw.length > 4) formatted = `${raw.slice(0, 2)}/${raw.slice(2, 4)}/${raw.slice(4, 8)}`;
+                setBirthday(formatted);
+              }}
+              maxLength={10}
               required
               aria-label="選擇生日日期"
               className="w-full px-4 py-3 rounded-lg bg-white/5 border border-white/20 text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-[#001489]/50 backdrop-blur-sm transition-all"
@@ -97,7 +104,7 @@ export function InputForm({ onSubmit }: InputFormProps) {
 
         <button
           type="submit"
-          disabled={!birthday || !selectedMood}
+          disabled={birthday.length !== 10 || !selectedMood}
           className="w-full py-4 rounded-lg bg-[#001489] hover:bg-[#001489]/90 disabled:bg-white/5 disabled:cursor-not-allowed text-white font-light tracking-wider transition-all"
         >
           探索能量飲品
