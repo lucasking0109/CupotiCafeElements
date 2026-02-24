@@ -47,8 +47,8 @@ const ELEMENT_DATA: Record<Element, ElementData> = {
     name: "金",
     chineseName: "Metal",
     emoji: "✨",
-    colors: ["#E8E8E8", "#C0C0C0", "#F5F5F5", "#D4D4D4"],
-    primaryColor: "#C0C0C0",
+    colors: ["#5C4A1E", "#7A6530", "#96804A", "#B09A60"],
+    primaryColor: "#5C4A1E",
     roast: "Medium+ Roast",
     coffeeOptions: [
       { name: "香橙冰美式", description: "醒神型單品", notes: ["柑橘爽感", "清晰線條", "果香層次"] },

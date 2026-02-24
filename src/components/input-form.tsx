@@ -46,13 +46,13 @@ export function InputForm({ onSubmit }: InputFormProps) {
             priority
           />
           <p className="text-white/60 text-sm tracking-widest">
-            五行能量飲品指南 | Coffee Energy Matrix
+            五行能量飲品指南
           </p>
         </div>
 
         <div className="space-y-8">
           <div className="space-y-4">
-            <label className="flex items-center gap-2 text-white/80 text-sm tracking-wide">
+            <label className="flex items-center gap-2 text-white text-sm font-medium tracking-wide">
               <Calendar size={16} className="text-[#001489]" />
               生日
             </label>
@@ -71,14 +71,14 @@ export function InputForm({ onSubmit }: InputFormProps) {
                     {`${birthday.slice(5, 7)}/${birthday.slice(8, 10)}/${birthday.slice(0, 4)}`}
                   </span>
                 ) : (
-                  <span className="text-white/40">MM/DD/YYYY</span>
+                  <span className="text-white/50 font-medium">MM/DD/YYYY</span>
                 )}
               </div>
             </div>
           </div>
 
           <div className="space-y-4">
-            <label className="flex items-center gap-2 text-white/80 text-sm tracking-wide">
+            <label className="flex items-center gap-2 text-white text-sm font-medium tracking-wide">
               <Heart size={16} className="text-[#001489]" />
               當前情緒
             </label>
@@ -99,7 +99,7 @@ export function InputForm({ onSubmit }: InputFormProps) {
                   }`}
                 >
                   <div className="text-2xl mb-1">{mood.icon}</div>
-                  <div className="text-xs font-light">{mood.label}</div>
+                  <div className="text-xs font-medium">{mood.label}</div>
                 </button>
               ))}
             </div>
@@ -109,7 +109,7 @@ export function InputForm({ onSubmit }: InputFormProps) {
         <button
           type="submit"
           disabled={!birthday || !selectedMood}
-          className="w-full py-4 rounded-lg bg-[#001489] hover:bg-[#001489]/90 disabled:bg-white/5 disabled:cursor-not-allowed text-white font-light tracking-wider transition-all border border-white/20"
+          className="w-full py-4 rounded-lg bg-[#001489] hover:bg-[#001489]/90 disabled:bg-white/5 disabled:cursor-not-allowed text-white font-medium tracking-wider transition-all border border-white/20"
         >
           探索能量飲品
         </button>
