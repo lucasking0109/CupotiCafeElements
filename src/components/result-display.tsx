@@ -59,7 +59,7 @@ export function ResultDisplay({ result, onReset, onShare }: ResultDisplayProps) 
                 className="text-6xl font-light text-white tracking-wider"
                 style={{ fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif" }}
               >
-                元素 {data.name}
+                {data.name} 元素
               </h2>
               <p className="text-white/70 text-lg tracking-widest uppercase">
                 {data.roast}
@@ -87,7 +87,7 @@ export function ResultDisplay({ result, onReset, onShare }: ResultDisplayProps) 
               {selectedCoffee.notes.map((note, index) => (
                 <span
                   key={index}
-                  className="px-4 py-2 rounded-lg bg-white/10 text-white/90 text-sm backdrop-blur-sm border border-white/20"
+                  className="px-4 py-2 rounded-lg bg-white/10 text-white/90 text-sm backdrop-blur-sm border border-white/20 whitespace-nowrap"
                 >
                   {note}
                 </span>
