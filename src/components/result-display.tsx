@@ -14,33 +14,14 @@ interface ResultDisplayProps {
 export function ResultDisplay({ result, onReset, onShare }: ResultDisplayProps) {
   const { data, selectedCoffee, luckyColor } = result;
   const cardRef = useRef<HTMLDivElement>(null);
+  const storyRef = useRef<HTMLDivElement>(null);
   const [saving, setSaving] = useState(false);
 
   const handleSaveCard = async () => {
-    if (!cardRef.current) return;
+    if (!storyRef.current) return;
     setSaving(true);
     try {
-      // Export as 1080x1920 (9:16) for IG Stories
-      const width = 540;
-      const height = 960;
-      const dataUrl = await toPng(cardRef.current, {
-        pixelRatio: 2,
-        width,
-        height,
-        style: {
-          width: `${width}px`,
-          height: `${height}px`,
-          borderRadius: "0",
-          border: "none",
-          boxShadow: "none",
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "center",
-          padding: "48px 40px",
-          background: `linear-gradient(135deg, ${data.colors[0]}, ${data.colors[1]}, ${data.colors[2]})`,
-          backdropFilter: "none",
-        },
-      });
+      const dataUrl = await toPng(storyRef.current, { pixelRatio: 2 });
       const res = await fetch(dataUrl);
       const blob = await res.blob();
       const file = new File([blob], `cupoti-cafe-${data.name}-energy-card.png`, {
@@ -65,6 +46,7 @@ export function ResultDisplay({ result, onReset, onShare }: ResultDisplayProps) 
   return (
     <div className="min-h-screen flex items-center justify-center p-6">
       <div className="w-full max-w-2xl space-y-8">
+        {/* Visible card */}
         <div
           ref={cardRef}
           className="backdrop-blur-2xl bg-white/5 p-12 rounded-2xl shadow-2xl border border-white/10 space-y-10"
@@ -128,6 +110,86 @@ export function ResultDisplay({ result, onReset, onShare }: ResultDisplayProps) 
             <p className="text-white/40 text-xs tracking-widest">
               Cupoti Cafe — Coffee Energy Matrix
             </p>
+          </div>
+        </div>
+
+        {/* Hidden IG Story card (9:16 = 540x960, output 1080x1920 @2x) */}
+        <div
+          ref={storyRef}
+          aria-hidden
+          style={{
+            position: "fixed",
+            left: "-9999px",
+            top: "-9999px",
+            width: 540,
+            height: 960,
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            alignItems: "center",
+            padding: "100px 44px 80px",
+            background: `linear-gradient(160deg, ${data.colors[0]}, ${data.colors[1]} 50%, ${data.colors[2]})`,
+            fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif",
+            color: "white",
+            textAlign: "center" as const,
+          }}
+        >
+          <div
+            style={{
+              width: 120,
+              height: 120,
+              borderRadius: 24,
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              fontSize: 56,
+              background: `linear-gradient(135deg, ${luckyColor}, ${data.colors[data.colors.length - 1]})`,
+              boxShadow: `0 16px 32px -4px ${data.colors[0]}60`,
+              marginBottom: 28,
+            }}
+          >
+            {data.emoji}
+          </div>
+
+          <div style={{ fontSize: 48, fontWeight: 300, letterSpacing: 8, marginBottom: 8 }}>
+            {data.name} 元素
+          </div>
+          <div style={{ fontSize: 14, opacity: 0.6, letterSpacing: 4, textTransform: "uppercase" as const, marginBottom: 12 }}>
+            {data.roast}
+          </div>
+          <div style={{ fontSize: 12, opacity: 0.7, letterSpacing: 3, marginBottom: 36 }}>
+            【 {data.mantra} 】
+          </div>
+
+          <div style={{ width: "70%", height: 1, background: "rgba(255,255,255,0.2)", marginBottom: 36 }} />
+
+          <div style={{ fontSize: 32, fontWeight: 300, marginBottom: 8 }}>
+            {selectedCoffee.name}
+          </div>
+          <div style={{ fontSize: 14, opacity: 0.6, letterSpacing: 2, marginBottom: 24 }}>
+            {selectedCoffee.description}
+          </div>
+
+          <div style={{ display: "flex", gap: 8, flexWrap: "wrap" as const, justifyContent: "center" }}>
+            {selectedCoffee.notes.map((note, index) => (
+              <span
+                key={index}
+                style={{
+                  padding: "6px 14px",
+                  borderRadius: 8,
+                  background: "rgba(255,255,255,0.12)",
+                  border: "1px solid rgba(255,255,255,0.2)",
+                  fontSize: 13,
+                  opacity: 0.9,
+                }}
+              >
+                {note}
+              </span>
+            ))}
+          </div>
+
+          <div style={{ position: "absolute", bottom: 40, fontSize: 10, opacity: 0.35, letterSpacing: 3 }}>
+            Cupoti Cafe — Coffee Energy Matrix
           </div>
         </div>
 
