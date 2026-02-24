@@ -23,8 +23,8 @@ export function ResultDisplay({ result, onReset, onShare }: ResultDisplayProps) 
       const dataUrl = await toPng(cardRef.current, {
         pixelRatio: 2,
         style: {
-          background: `linear-gradient(135deg, ${data.colors[0]}, ${data.colors[1]}, ${data.colors[2]})`,
-          border: "none",
+          background: `linear-gradient(135deg, rgba(255,255,255,0.12) 0%, rgba(255,255,255,0.04) 40%, rgba(255,255,255,0.08) 100%), linear-gradient(135deg, ${data.colors[0]}, ${data.colors[1]}, ${data.colors[2]})`,
+          border: "1px solid rgba(255,255,255,0.15)",
           backdropFilter: "none",
         },
       });
