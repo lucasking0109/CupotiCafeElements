@@ -21,10 +21,7 @@ export function ResultDisplay({ result, onReset, onShare }: ResultDisplayProps) 
     if (!storyRef.current) return;
     setSaving(true);
     try {
-      const dataUrl = await toPng(storyRef.current, {
-        pixelRatio: 2,
-        style: { opacity: "1" },
-      });
+      const dataUrl = await toPng(storyRef.current, { pixelRatio: 2 });
       const res = await fetch(dataUrl);
       const blob = await res.blob();
       const file = new File([blob], `cupoti-cafe-${data.name}-energy-card.png`, {
@@ -124,9 +121,8 @@ export function ResultDisplay({ result, onReset, onShare }: ResultDisplayProps) 
             position: "fixed",
             left: 0,
             top: 0,
-            opacity: 0,
-            pointerEvents: "none" as const,
             zIndex: -9999,
+            pointerEvents: "none" as const,
             width: 540,
             height: 960,
             display: "flex",
