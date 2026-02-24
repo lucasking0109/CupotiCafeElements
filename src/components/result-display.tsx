@@ -20,11 +20,24 @@ export function ResultDisplay({ result, onReset, onShare }: ResultDisplayProps) 
     if (!cardRef.current) return;
     setSaving(true);
     try {
+      // Export as 1080x1920 (9:16) for IG Stories
+      const width = 540;
+      const height = 960;
       const dataUrl = await toPng(cardRef.current, {
         pixelRatio: 2,
+        width,
+        height,
         style: {
-          background: `linear-gradient(135deg, rgba(255,255,255,0.12) 0%, rgba(255,255,255,0.04) 40%, rgba(255,255,255,0.08) 100%), linear-gradient(135deg, ${data.colors[0]}, ${data.colors[1]}, ${data.colors[2]})`,
-          border: "1px solid rgba(255,255,255,0.15)",
+          width: `${width}px`,
+          height: `${height}px`,
+          borderRadius: "0",
+          border: "none",
+          boxShadow: "none",
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
+          padding: "48px 40px",
+          background: `linear-gradient(135deg, ${data.colors[0]}, ${data.colors[1]}, ${data.colors[2]})`,
           backdropFilter: "none",
         },
       });
@@ -61,9 +74,10 @@ export function ResultDisplay({ result, onReset, onShare }: ResultDisplayProps) 
         >
           <div className="text-center space-y-8">
             <div
-              className="w-40 h-40 mx-auto rounded-2xl shadow-2xl flex items-center justify-center text-7xl"
+              className="w-40 h-40 mx-auto rounded-2xl flex items-center justify-center text-7xl"
               style={{
                 background: `linear-gradient(135deg, ${luckyColor}, ${data.colors[data.colors.length - 1]})`,
+                boxShadow: `0 20px 40px -8px ${data.colors[0]}80`,
               }}
             >
               {data.emoji}
