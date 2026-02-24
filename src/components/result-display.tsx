@@ -23,10 +23,20 @@ export function ResultDisplay({ result, onReset, onShare }: ResultDisplayProps) 
       const dataUrl = await toPng(cardRef.current, {
         pixelRatio: 2,
       });
-      const link = document.createElement("a");
-      link.download = `cupoti-cafe-${data.name}-energy-card.png`;
-      link.href = dataUrl;
-      link.click();
+      const res = await fetch(dataUrl);
+      const blob = await res.blob();
+      const file = new File([blob], `cupoti-cafe-${data.name}-energy-card.png`, {
+        type: "image/png",
+      });
+
+      if (navigator.canShare?.({ files: [file] })) {
+        await navigator.share({ files: [file] });
+      } else {
+        const link = document.createElement("a");
+        link.download = file.name;
+        link.href = dataUrl;
+        link.click();
+      }
     } catch {
       alert("儲存失敗，請稍後再試");
     } finally {
