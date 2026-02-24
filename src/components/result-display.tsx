@@ -89,9 +89,6 @@ export function ResultDisplay({ result, onReset, onShare }: ResultDisplayProps) 
               >
                 {selectedCoffee.name}
               </h3>
-              <p className="text-white/70 text-lg tracking-wide">
-                {selectedCoffee.description}
-              </p>
             </div>
 
             <div className="flex justify-center gap-2 flex-wrap">
@@ -179,11 +176,8 @@ export function ResultDisplay({ result, onReset, onShare }: ResultDisplayProps) 
 
             <div style={{ width: "80%", height: 1, background: "rgba(255,255,255,0.2)", marginBottom: 32 }} />
 
-            <div style={{ fontSize: 36, fontWeight: 300, marginBottom: 10 }}>
+            <div style={{ fontSize: 36, fontWeight: 300, marginBottom: 24 }}>
               {selectedCoffee.name}
-            </div>
-            <div style={{ fontSize: 16, opacity: 0.65, letterSpacing: 2, marginBottom: 24 }}>
-              {selectedCoffee.description}
             </div>
 
             <div style={{ display: "flex", gap: 8, flexWrap: "wrap" as const, justifyContent: "center" }}>
