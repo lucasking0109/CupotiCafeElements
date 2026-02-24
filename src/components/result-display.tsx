@@ -72,9 +72,6 @@ export function ResultDisplay({ result, onReset, onShare }: ResultDisplayProps) 
               >
                 {data.name} 元素
               </h2>
-              <p className="text-white/70 text-lg tracking-widest uppercase">
-                {data.roast}
-              </p>
               <p className="text-white/80 text-sm tracking-widest">
                 【 {data.mantra} 】
               </p>
@@ -164,11 +161,8 @@ export function ResultDisplay({ result, onReset, onShare }: ResultDisplayProps) 
               {data.emoji}
             </div>
 
-            <div style={{ fontSize: 52, fontWeight: 300, letterSpacing: 8, marginBottom: 10 }}>
+            <div style={{ fontSize: 52, fontWeight: 300, letterSpacing: 8, marginBottom: 12 }}>
               {data.name} 元素
-            </div>
-            <div style={{ fontSize: 16, opacity: 0.65, letterSpacing: 4, textTransform: "uppercase" as const, marginBottom: 12 }}>
-              {data.roast}
             </div>
             <div style={{ fontSize: 14, opacity: 0.75, letterSpacing: 3, marginBottom: 32 }}>
               【 {data.mantra} 】
