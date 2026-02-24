@@ -2,7 +2,7 @@
 
 import { useRef, useState } from "react";
 import { Download, Share2, RotateCcw } from "lucide-react";
-import html2canvas from "html2canvas";
+import { toPng } from "html-to-image";
 import type { Result } from "@/lib/types";
 
 interface ResultDisplayProps {
@@ -20,14 +20,12 @@ export function ResultDisplay({ result, onReset, onShare }: ResultDisplayProps) 
     if (!cardRef.current) return;
     setSaving(true);
     try {
-      const canvas = await html2canvas(cardRef.current, {
-        backgroundColor: null,
-        scale: 2,
-        useCORS: true,
+      const dataUrl = await toPng(cardRef.current, {
+        pixelRatio: 2,
       });
       const link = document.createElement("a");
       link.download = `cupoti-cafe-${data.name}-energy-card.png`;
-      link.href = canvas.toDataURL("image/png");
+      link.href = dataUrl;
       link.click();
     } catch {
       alert("儲存失敗，請稍後再試");
@@ -61,7 +59,7 @@ export function ResultDisplay({ result, onReset, onShare }: ResultDisplayProps) 
                 className="text-6xl font-light text-white tracking-wider"
                 style={{ fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif" }}
               >
-                {data.name} Element
+                元素 {data.name}
               </h2>
               <p className="text-white/70 text-lg tracking-widest uppercase">
                 {data.roast}
