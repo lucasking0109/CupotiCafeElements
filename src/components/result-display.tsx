@@ -72,7 +72,7 @@ export function ResultDisplay({ result, onReset, onShare }: ResultDisplayProps) 
               >
                 {data.name} 元素
               </h2>
-              <p className="text-white/80 text-sm tracking-widest">
+              <p className="text-white/80 text-sm tracking-widest whitespace-nowrap">
                 【 {data.mantra} 】
               </p>
             </div>
