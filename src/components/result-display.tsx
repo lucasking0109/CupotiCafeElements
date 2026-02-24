@@ -22,6 +22,11 @@ export function ResultDisplay({ result, onReset, onShare }: ResultDisplayProps) 
     try {
       const dataUrl = await toPng(cardRef.current, {
         pixelRatio: 2,
+        style: {
+          background: `linear-gradient(135deg, ${data.colors[0]}, ${data.colors[1]}, ${data.colors[2]})`,
+          border: "none",
+          backdropFilter: "none",
+        },
       });
       const res = await fetch(dataUrl);
       const blob = await res.blob();
