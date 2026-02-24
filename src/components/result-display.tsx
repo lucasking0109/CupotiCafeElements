@@ -21,7 +21,10 @@ export function ResultDisplay({ result, onReset, onShare }: ResultDisplayProps) 
     if (!storyRef.current) return;
     setSaving(true);
     try {
-      const dataUrl = await toPng(storyRef.current, { pixelRatio: 2 });
+      const dataUrl = await toPng(storyRef.current, {
+        pixelRatio: 2,
+        style: { opacity: "1" },
+      });
       const res = await fetch(dataUrl);
       const blob = await res.blob();
       const file = new File([blob], `cupoti-cafe-${data.name}-energy-card.png`, {
@@ -119,8 +122,11 @@ export function ResultDisplay({ result, onReset, onShare }: ResultDisplayProps) 
           aria-hidden
           style={{
             position: "fixed",
-            left: "-9999px",
-            top: "-9999px",
+            left: 0,
+            top: 0,
+            opacity: 0,
+            pointerEvents: "none" as const,
+            zIndex: -9999,
             width: 540,
             height: 960,
             display: "flex",
