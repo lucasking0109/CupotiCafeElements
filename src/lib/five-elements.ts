@@ -100,15 +100,16 @@ function calculateElement(birthday: Date, mood: Mood): Element {
 function selectCoffeeOption(
   options: ElementData["coffeeOptions"],
   birthday: Date,
+  mood: Mood,
 ) {
-  const seed = birthday.getDate() + birthday.getMonth();
+  const seed = birthday.getDate() + birthday.getMonth() + MOOD_MODIFIERS[mood];
   return options[seed % options.length];
 }
 
 export function calculateFortune(input: UserInput): Result {
   const element = calculateElement(input.birthday, input.mood);
   const data = ELEMENT_DATA[element];
-  const selectedCoffee = selectCoffeeOption(data.coffeeOptions, input.birthday);
+  const selectedCoffee = selectCoffeeOption(data.coffeeOptions, input.birthday, input.mood);
 
   return {
     element,
