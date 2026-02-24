@@ -129,69 +129,83 @@ export function ResultDisplay({ result, onReset, onShare }: ResultDisplayProps) 
             flexDirection: "column",
             justifyContent: "center",
             alignItems: "center",
-            padding: "100px 44px 80px",
+            padding: "60px 30px",
             background: `linear-gradient(160deg, ${data.colors[0]}, ${data.colors[1]} 50%, ${data.colors[2]})`,
             fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif",
             color: "white",
             textAlign: "center" as const,
           }}
         >
+          {/* Inner card frame */}
           <div
             style={{
-              width: 120,
-              height: 120,
-              borderRadius: 24,
+              width: "100%",
               display: "flex",
+              flexDirection: "column",
               alignItems: "center",
-              justifyContent: "center",
-              fontSize: 56,
-              background: `linear-gradient(135deg, ${luckyColor}, ${data.colors[data.colors.length - 1]})`,
-              boxShadow: `0 16px 32px -4px ${data.colors[0]}60`,
-              marginBottom: 28,
+              padding: "48px 36px",
+              borderRadius: 20,
+              background: "rgba(255,255,255,0.08)",
+              border: "1px solid rgba(255,255,255,0.15)",
+              boxShadow: "0 8px 32px rgba(0,0,0,0.12)",
             }}
           >
-            {data.emoji}
-          </div>
+            <div
+              style={{
+                width: 130,
+                height: 130,
+                borderRadius: 24,
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                fontSize: 64,
+                background: `linear-gradient(135deg, ${luckyColor}, ${data.colors[data.colors.length - 1]})`,
+                boxShadow: `0 12px 24px -4px ${data.colors[0]}50`,
+                marginBottom: 28,
+              }}
+            >
+              {data.emoji}
+            </div>
 
-          <div style={{ fontSize: 48, fontWeight: 300, letterSpacing: 8, marginBottom: 8 }}>
-            {data.name} 元素
-          </div>
-          <div style={{ fontSize: 14, opacity: 0.6, letterSpacing: 4, textTransform: "uppercase" as const, marginBottom: 12 }}>
-            {data.roast}
-          </div>
-          <div style={{ fontSize: 12, opacity: 0.7, letterSpacing: 3, marginBottom: 36 }}>
-            【 {data.mantra} 】
-          </div>
+            <div style={{ fontSize: 52, fontWeight: 300, letterSpacing: 8, marginBottom: 10 }}>
+              {data.name} 元素
+            </div>
+            <div style={{ fontSize: 16, opacity: 0.65, letterSpacing: 4, textTransform: "uppercase" as const, marginBottom: 12 }}>
+              {data.roast}
+            </div>
+            <div style={{ fontSize: 14, opacity: 0.75, letterSpacing: 3, marginBottom: 32 }}>
+              【 {data.mantra} 】
+            </div>
 
-          <div style={{ width: "70%", height: 1, background: "rgba(255,255,255,0.2)", marginBottom: 36 }} />
+            <div style={{ width: "80%", height: 1, background: "rgba(255,255,255,0.2)", marginBottom: 32 }} />
 
-          <div style={{ fontSize: 32, fontWeight: 300, marginBottom: 8 }}>
-            {selectedCoffee.name}
-          </div>
-          <div style={{ fontSize: 14, opacity: 0.6, letterSpacing: 2, marginBottom: 24 }}>
-            {selectedCoffee.description}
-          </div>
+            <div style={{ fontSize: 36, fontWeight: 300, marginBottom: 10 }}>
+              {selectedCoffee.name}
+            </div>
+            <div style={{ fontSize: 16, opacity: 0.65, letterSpacing: 2, marginBottom: 24 }}>
+              {selectedCoffee.description}
+            </div>
 
-          <div style={{ display: "flex", gap: 8, flexWrap: "wrap" as const, justifyContent: "center" }}>
-            {selectedCoffee.notes.map((note, index) => (
-              <span
-                key={index}
-                style={{
-                  padding: "6px 14px",
-                  borderRadius: 8,
-                  background: "rgba(255,255,255,0.12)",
-                  border: "1px solid rgba(255,255,255,0.2)",
-                  fontSize: 13,
-                  opacity: 0.9,
-                }}
-              >
-                {note}
-              </span>
-            ))}
-          </div>
+            <div style={{ display: "flex", gap: 8, flexWrap: "wrap" as const, justifyContent: "center" }}>
+              {selectedCoffee.notes.map((note, index) => (
+                <span
+                  key={index}
+                  style={{
+                    padding: "8px 16px",
+                    borderRadius: 10,
+                    background: "rgba(255,255,255,0.12)",
+                    border: "1px solid rgba(255,255,255,0.2)",
+                    fontSize: 15,
+                  }}
+                >
+                  {note}
+                </span>
+              ))}
+            </div>
 
-          <div style={{ position: "absolute", bottom: 40, fontSize: 10, opacity: 0.35, letterSpacing: 3 }}>
-            Cupoti Cafe — Coffee Energy Matrix
+            <div style={{ marginTop: 32, fontSize: 11, opacity: 0.35, letterSpacing: 3 }}>
+              Cupoti Cafe — Coffee Energy Matrix
+            </div>
           </div>
         </div>
 
